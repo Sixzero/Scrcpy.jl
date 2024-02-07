@@ -1,6 +1,6 @@
-# ScrcpyConnect.jl
+# Scrcpy.jl
 
-`ScrcpyConnect.jl` is a Julia wrapper for `scrcpy`, allowing users to stream their mobile device's screen to their computer and simulate touch events via a socket connection. This package enables high-level control and interaction with Android devices for applications ranging from automated testing to remote control. 
+`Scrcpy.jl` is a Julia wrapper for `scrcpy`, allowing users to stream their mobile device's screen to their computer and simulate touch events via a socket connection. This package enables high-level control and interaction with Android devices for applications ranging from automated testing to remote control. 
 
 ## Features
 
@@ -25,7 +25,7 @@ First, ensure your Android device is connected to your computer and USB debuggin
 ```julia
 using Scrcpy
 # Initialize the scrcpy server and establish a connection
-video_socket, ctrl_socket, state = ScrcpyConnect.initialize_scrcpy_control(video=true, max_size=1200)
+video_socket, ctrl_socket, state = initialize_scrcpy_control(video=true, max_size=1200)
 ```
 ## Streaming the Screen
 To access the video frames directly in Julia for processing or analysis. This requires an active video_socket.
