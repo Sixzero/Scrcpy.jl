@@ -28,15 +28,18 @@ using Scrcpy
 video_socket, ctrl_socket, state = initialize_scrcpy_control(video=true, max_size=1200)
 ```
 ## Streaming the Screen
-To access the video frames directly in Julia for processing or analysis. This requires an active video_socket.
+To access the video frames directly in Julia for processing or analysis. This requires an active video_socket, also 
 ```julia
 using Scrcpy: get_stream
 
-device = "/dev/video0"  # Device file for the video stream, this will get created. This is basically going to be used as a camera source, which will be used by `scrcpy --max-fps $fps -m $max_width --v4l2-sink=$device``
-cap = get_stream(device, fps, max_width) # set fps and max_width of stream
+cap = get_stream(fps, max_width) # set fps and max_width of stream
 # Capture a frame from the video stream
 frame = read(cap)
 ```
+This feature needs v4l2loopback to be installed:
+`sudo apt install v4l2loopback-dkms`
+> Note: `/dev/video0` will be the default device file for the video stream, this will get automatically created. This is basically going to be used as a camera source, which will be used by `scrcpy --max-fps $fps -m $max_width --v4l2-sink=/dev/video0`
+
 ## Simulating Touch Events
 You can simulate touch events such as tap and swipe using the control socket.
 ```julia
@@ -49,11 +52,13 @@ swipe(state, 300, 300, 200, 200)
 # Swipe without releasing the at the end of swipe, so drags/swipes can be continued:
 set_swipe(state, 300,300, -100,-100) # if 
 set_swipe(state, 1111,300, -110,-110) # if it is not relased between the two, then the touch position doesn't matter the Δx and Δy matters from the initial 300,300 position and 1111,300 doesn't matter in this case. This seemed a reasonable approach, but I am curious what the best idea for this interface would be, the possibilities are unlimited with scrcpy. 
-
 ```
 
-## Advanced Usage
-For more advanced usage, including customizing the video stream's properties and handling touch events more granely, refer to the module documentation within the code.
+## Further feature 
+- Windows and Mac support (these are just untested).
+- Create native h264 video decoding from the video_socket stream. Current solution works through starting a secondary `scrcpy` which provides a virtual camera stream, which we use with `VideoIO` as a cam source.
+
+Otherwise the package is in stable state.
 
 ## Contributing
 Contributions to Scrcpy.jl are welcome! Please refer to the CONTRIBUTING.md for guidelines.

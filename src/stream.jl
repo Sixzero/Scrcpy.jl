@@ -21,7 +21,7 @@ function check_scrcpy_running(device)
   end
 end
 # Use this to get frame = read(cap) to get the next frame from the mobile video stream (camera)
-function get_stream(device="/dev/video0", fps=15, max_width=1200)
+function get_stream(fps=15, max_width=1200, device="/dev/video0")
   scrcpy_status = check_scrcpy_running(device)
   @show scrcpy_status
   if !scrcpy_status
