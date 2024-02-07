@@ -14,7 +14,7 @@ To use `Scrcpy.jl`, you can add `Scrcpy` using Julia's package manager.
 
 ```julia
 using Pkg
-Pkg.add("Scrcpy")
+Pkg.add("https://github.com/Sixzero/Scrcpy.jl.git")
 ``````
 Make sure you have scrcpy and adb (Android Debug Bridge) installed on your system as these are required for the package to function.
 
