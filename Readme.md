@@ -66,3 +66,6 @@ Contributions to Scrcpy.jl are welcome! Please refer to the CONTRIBUTING.md for 
 ## License
 Scrcpy.jl is released under the MIT License. See the LICENSE file for more details.
 
+## Experimental
+
+- Experimental socket video capturing with: `get_next_frames` currently works through python `av` package, so install `pip install -r requirements.txt`. To work with the h264 stream we should use julia, but the `PyCall` code is a good start. 
